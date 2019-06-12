@@ -61,6 +61,15 @@ client_scripts {
   "config.lua"
 }
 ```
+Then add this on the bottom of esx_inventoryhud/__resource.lua
+
+```
+exports{
+  "refreshPropertyMotelBedInventory",
+  "refreshPropertyMotelInventory"
+}
+```
+
 
 We now need to adjust the Javascript files for inventory hud, to allow the loading of the Inventorys successfully
 Open esx_inventoryhud/html/js/inventory.js
