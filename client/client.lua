@@ -1,13 +1,13 @@
 Keys = {
-	["ESC"] = 322, ["F1"] = 288, ["F2"] = 289, ["F3"] = 170, ["F5"] = 166, ["F6"] = 167, ["F7"] = 168, ["F8"] = 169, ["F9"] = 56, ["F10"] = 57, 
-	["~"] = 243, ["1"] = 157, ["2"] = 158, ["3"] = 160, ["4"] = 164, ["5"] = 165, ["6"] = 159, ["7"] = 161, ["8"] = 162, ["9"] = 163, ["-"] = 84, ["="] = 83, ["BACKSPACE"] = 177, 
-	["TAB"] = 37, ["Q"] = 44, ["W"] = 32, ["E"] = 38, ["R"] = 45, ["T"] = 245, ["Y"] = 246, ["U"] = 303, ["P"] = 199, ["["] = 39, ["]"] = 40, ["ENTER"] = 18,
-	["CAPS"] = 137, ["A"] = 34, ["S"] = 8, ["D"] = 9, ["F"] = 23, ["G"] = 47, ["H"] = 74, ["K"] = 311, ["L"] = 182,
-	["LEFTSHIFT"] = 21, ["Z"] = 20, ["X"] = 73, ["C"] = 26, ["V"] = 0, ["B"] = 29, ["N"] = 249, ["M"] = 244, [","] = 82, ["."] = 81,
-	["LEFTCTRL"] = 36, ["LEFTALT"] = 19, ["SPACE"] = 22, ["RIGHTCTRL"] = 70, 
-	["HOME"] = 213, ["PAGEUP"] = 10, ["PAGEDOWN"] = 11, ["DELETE"] = 178,
-	["LEFT"] = 174, ["RIGHT"] = 175, ["TOP"] = 27, ["DOWN"] = 173,
-	["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
+  ["ESC"] = 322, ["F1"] = 288, ["F2"] = 289, ["F3"] = 170, ["F5"] = 166, ["F6"] = 167, ["F7"] = 168, ["F8"] = 169, ["F9"] = 56, ["F10"] = 57, 
+  ["~"] = 243, ["1"] = 157, ["2"] = 158, ["3"] = 160, ["4"] = 164, ["5"] = 165, ["6"] = 159, ["7"] = 161, ["8"] = 162, ["9"] = 163, ["-"] = 84, ["="] = 83, ["BACKSPACE"] = 177, 
+  ["TAB"] = 37, ["Q"] = 44, ["W"] = 32, ["E"] = 38, ["R"] = 45, ["T"] = 245, ["Y"] = 246, ["U"] = 303, ["P"] = 199, ["["] = 39, ["]"] = 40, ["ENTER"] = 18,
+  ["CAPS"] = 137, ["A"] = 34, ["S"] = 8, ["D"] = 9, ["F"] = 23, ["G"] = 47, ["H"] = 74, ["K"] = 311, ["L"] = 182,
+  ["LEFTSHIFT"] = 21, ["Z"] = 20, ["X"] = 73, ["C"] = 26, ["V"] = 0, ["B"] = 29, ["N"] = 249, ["M"] = 244, [","] = 82, ["."] = 81,
+  ["LEFTCTRL"] = 36, ["LEFTALT"] = 19, ["SPACE"] = 22, ["RIGHTCTRL"] = 70, 
+  ["HOME"] = 213, ["PAGEUP"] = 10, ["PAGEDOWN"] = 11, ["DELETE"] = 178,
+  ["LEFT"] = 174, ["RIGHT"] = 175, ["TOP"] = 27, ["DOWN"] = 173,
+  ["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
 }
 
 local ESX = nil
@@ -25,14 +25,14 @@ local FirstSpawn = true
 local letSleep = false
 
 Citizen.CreateThread(function()
-	while ESX == nil do
-		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-		Citizen.Wait(0)
-	end
-	while ESX.GetPlayerData().job == nil do
-		Citizen.Wait(10)
-	end
-	ESX.PlayerData = ESX.GetPlayerData()
+  while ESX == nil do
+    TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+    Citizen.Wait(0)
+  end
+  while ESX.GetPlayerData().job == nil do
+    Citizen.Wait(10)
+  end
+  ESX.PlayerData = ESX.GetPlayerData()
   createBlips()
   playerIdent = ESX.GetPlayerData().identifier
 end)
@@ -41,12 +41,12 @@ AddEventHandler('playerSpawned', function()
   if FirstSpawn then
     Citizen.CreateThread(function()
       while not ESX.IsPlayerLoaded() do
-		    Citizen.Wait(0)
+        Citizen.Wait(0)
       end
     Citizen.Wait(1000)
     ESX.TriggerServerCallback('lsrp-motels:getLastMotel', function(motel, room)
       print('loading saved room')
-		  if motel and room then
+      if motel and room then
         if motel ~= nil and room ~= nil then
           print('loading saved room 2')
           curMotel      = motel
@@ -65,9 +65,9 @@ AddEventHandler('playerSpawned', function()
             local instanceid = 'motel'..roomID..''..roomIdent
               TriggerEvent('instance:create', 'motelroom', {property = instanceid, owner = ESX.GetPlayerData().identifier, motel = reqmotel, room = roomIdent, vid = roomID})
             end
-				  end
-			 end
-		  end)
+          end
+       end
+      end)
     end)
   FirstSpawn = false 
   end
@@ -76,14 +76,14 @@ end)
 function createBlips()
   for k,v in pairs(Config.Zones) do
     local blip = AddBlipForCoord(tonumber(v.Pos.x), tonumber(v.Pos.y), tonumber(v.Pos.z))
-		SetBlipSprite(blip, v.Pos.sprite)
-		SetBlipDisplay(blip, 4)
-		SetBlipScale(blip, v.Pos.size)
-		SetBlipColour(blip, v.Pos.color)
-		SetBlipAsShortRange(blip, true)
-		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString(v.Name)
-		EndTextCommandSetBlipName(blip)
+    SetBlipSprite(blip, v.Pos.sprite)
+    SetBlipDisplay(blip, 4)
+    SetBlipScale(blip, v.Pos.size)
+    SetBlipColour(blip, v.Pos.color)
+    SetBlipAsShortRange(blip, true)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentString(v.Name)
+    EndTextCommandSetBlipName(blip)
   end
 end
 
@@ -100,8 +100,8 @@ RegisterNetEvent('instance:onCreate')
 AddEventHandler('instance:onCreate', function(instance)
   if instance.type == 'motelroom' then
     roomOwner = ESX.GetPlayerData().identifier
-		TriggerEvent('instance:enter', instance)
-	end
+    TriggerEvent('instance:enter', instance)
+  end
 end)
 
 RegisterNetEvent('lsrp-motels:cancelRental')
@@ -134,7 +134,7 @@ AddEventHandler('lsrp-motels:cancelRental', function(room)
       anim = "idle_a",
     },
     prop = {
-      model = "prop_notepad_01"	
+      model = "prop_notepad_01" 
     }
     }, function(status)
     if not status then
@@ -146,44 +146,44 @@ end)
 
 function PlayerDressings()
   ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'room',{
-		title    = 'Player Clothing',
-		align    = 'top-left',
-		elements = {
+    title    = 'Player Clothing',
+    align    = 'top-left',
+    elements = {
       {label = _U('player_clothes'), value = 'player_dressing'},
       {label = _U('remove_cloth'), value = 'remove_cloth'}
     }
     }, function(data, menu)
       if data.current.value == 'player_dressing' then 
         menu.close()
-		    ESX.TriggerServerCallback('lsrp-motels:getPlayerDressing', function(dressing)
+        ESX.TriggerServerCallback('lsrp-motels:getPlayerDressing', function(dressing)
           elements = {}
           for i=1, #dressing, 1 do
             table.insert(elements, {
             label = dressing[i],
-				    value = i
+            value = i
           })
-		    end
-		    ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'player_dressing',{
-		      title    = _U('player_clothes'),
+        end
+        ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'player_dressing',{
+          title    = _U('player_clothes'),
           align    = 'top-left',
           elements = elements
-		    }, function(data2, menu2)
-		    TriggerEvent('skinchanger:getSkin', function(skin)
-		      ESX.TriggerServerCallback('lsrp-motels:getPlayerOutfit', function(clothes)
-		        TriggerEvent('skinchanger:loadClothes', skin, clothes)
+        }, function(data2, menu2)
+        TriggerEvent('skinchanger:getSkin', function(skin)
+          ESX.TriggerServerCallback('lsrp-motels:getPlayerOutfit', function(clothes)
+            TriggerEvent('skinchanger:loadClothes', skin, clothes)
             TriggerEvent('esx_skin:setLastSkin', skin)
             TriggerEvent('skinchanger:getSkin', function(skin)
-		          TriggerServerEvent('esx_skin:save', skin)
+              TriggerServerEvent('esx_skin:save', skin)
             end)
           end, data2.current.value)
-		    end)
+        end)
       end, function(data2, menu2)
-		    menu2.close()
+        menu2.close()
       end)
     end)
     elseif data.current.value == 'remove_cloth' then
       menu.close()
-		  ESX.TriggerServerCallback('lsrp-motels:getPlayerDressing', function(dressing)
+      ESX.TriggerServerCallback('lsrp-motels:getPlayerDressing', function(dressing)
         elements = {}
         for i=1, #dressing, 1 do
           table.insert(elements, {
@@ -196,13 +196,13 @@ function PlayerDressings()
           align    = 'top-left',
           elements = elements
         }, function(data2, menu2)
-				menu2.close()
-				TriggerServerEvent('lsrp-motels:removeOutfit', data2.current.value)
-				ESX.ShowNotification(_U('removed_cloth'))
+        menu2.close()
+        TriggerServerEvent('lsrp-motels:removeOutfit', data2.current.value)
+        ESX.ShowNotification(_U('removed_cloth'))
         end, function(data2, menu2)
           menu2.close()
         end)
-		  end)
+      end)
     end
   end, function(data, menu)
     menu.close()
@@ -218,7 +218,7 @@ AddEventHandler('instance:onEnter', function(instance)
     Citizen.Wait(1000)
     local networkChannel = instance.data.vid
     NetworkSetVoiceChannel(networkChannel)
-	end
+  end
 end)
 
 AddEventHandler('instance:loaded', function()
@@ -228,8 +228,8 @@ AddEventHandler('instance:loaded', function()
   end, function(instance)
     exitMotel = true
     Citizen.InvokeNative(0xE036A705F989E049)
-		ExitMotel(instance.data.property, instance.data.motel, instance.data.room)
-	end)
+    ExitMotel(instance.data.property, instance.data.motel, instance.data.room)
+  end)
 end)
 
 function EnterMotel(name, owner, motel, room)
@@ -405,7 +405,7 @@ AddEventHandler('lsrp-motels:roomMenu', function(room, motel)
         end
       end
     end      
-		local elements      = {}
+    local elements      = {}
     if playersInArea ~= nil then
       for i=1, #playersInArea, 1 do
         if playersInArea[i] ~= PlayerId() then
@@ -415,21 +415,21 @@ AddEventHandler('lsrp-motels:roomMenu', function(room, motel)
     else
       table.insert(elements, {label = 'No Citizens Outside.'})
     end
-		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'room_invite',{
-			title    = motelName..' Room '..motelRoom .. ' - ' .. _U('invite') ..' Citizen',
-			align    = 'top-right',
-			elements = elements,
+    ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'room_invite',{
+      title    = motelName..' Room '..motelRoom .. ' - ' .. _U('invite') ..' Citizen',
+      align    = 'top-right',
+      elements = elements,
     }, function(data2, menu2)
       ESX.TriggerServerCallback('lsrp-motels:getMotelRoomID', function(roomno)
         print(room)
         roomID = roomno
       end, room)
       myInstance = 'motel'..roomID..''..roomIdent
-			TriggerEvent('instance:invite', 'motelroom', GetPlayerServerId(data2.current.value), {property = myInstance, owner = ESX.GetPlayerData().identifier, motel = reqmotel, room = roomIdent, vid = roomID})
-			ESX.ShowNotification(_U('you_invited', GetPlayerName(data2.current.value)))
+      TriggerEvent('instance:invite', 'motelroom', GetPlayerServerId(data2.current.value), {property = myInstance, owner = ESX.GetPlayerData().identifier, motel = reqmotel, room = roomIdent, vid = roomID})
+      ESX.ShowNotification(_U('you_invited', GetPlayerName(data2.current.value)))
     end, function(data2, menu2)
-			menu2.close()
-			end)
+      menu2.close()
+      end)
     end
   end,function(data, menu)
     menu.close()
@@ -466,7 +466,7 @@ AddEventHandler('lsrp-motels:rentRoom', function(room)
       anim = "idle_a",
     },
     prop = {
-      model = "prop_notepad_01"	
+      model = "prop_notepad_01" 
     }
     }, function(status)
     if not status then
@@ -528,14 +528,14 @@ end
 
 function enteredMarker()
   local playerPed = PlayerPedId()
-	local coords    = GetEntityCoords(playerPed)
+  local coords    = GetEntityCoords(playerPed)
   if myMotel then 
     for k,v in pairs(Config.Zones) do
       for km,vm in pairs(v.Rooms) do
         if vm.instancename == myMotel then
           distance = GetDistanceBetweenCoords(coords, vm.entry.x, vm.entry.y, vm.entry.z, true)
           if (distance < v.Boundries) then
-            DrawMarker(20, vm.entry.x, vm.entry.y, vm.entry.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.RoomMarker.x, Config.RoomMarker.y, Config.RoomMarker.z, Config.RoomMarker.Owned.r, Config.RoomMarker.Owned.g, Config.RoomMarker.Owned.b, 100, false, true, 2, false, false, false, false)	
+            DrawMarker(20, vm.entry.x, vm.entry.y, vm.entry.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.RoomMarker.x, Config.RoomMarker.y, Config.RoomMarker.z, Config.RoomMarker.Owned.r, Config.RoomMarker.Owned.g, Config.RoomMarker.Owned.b, 100, false, true, 2, false, false, false, false) 
           end
           if (distance < 1.0) then
             DrawText3D(vm.entry.x, vm.entry.y, vm.entry.z + 0.35, 'Press [~g~E~s~] for options.')
@@ -620,15 +620,15 @@ Citizen.CreateThread(function()
 end)
 
 function OpenPropertyInventoryMenu(property, owner)
-	ESX.TriggerServerCallback("lsrp-motels:getPropertyInventory",function(inventory)
-		TriggerEvent("esx_inventoryhud:openMotelsInventory", inventory)
-	end, owner)
+  ESX.TriggerServerCallback("lsrp-motels:getPropertyInventory",function(inventory)
+    TriggerEvent("esx_inventoryhud:openMotelsInventory", inventory)
+  end, owner)
 end
 
 function OpenPropertyInventoryMenuBed(property, owner)
-	ESX.TriggerServerCallback("lsrp-motels:getPropertyInventoryBed",function(inventory)
-		TriggerEvent("esx_inventoryhud:openMotelsInventoryBed", inventory)
-	end, owner)
+  ESX.TriggerServerCallback("lsrp-motels:getPropertyInventoryBed",function(inventory)
+    TriggerEvent("esx_inventoryhud:openMotelsInventoryBed", inventory)
+  end, owner)
 end
 
 function OpenStash()
@@ -659,20 +659,20 @@ function OpenStash()
 end
 
 DrawText3D = function(x, y, z, text)
-	local onScreen,_x,_y=World3dToScreen2d(x,y,z)
-	local px,py,pz=table.unpack(GetGameplayCamCoords()) 
-	local scale = 0.45
-	if onScreen then
-		SetTextScale(scale, scale)
-		SetTextFont(4)
-		SetTextProportional(1)
-		SetTextColour(255, 255, 255, 215)
-		SetTextOutline()
-		SetTextEntry("STRING")
-		SetTextCentre(1)
-		AddTextComponentString(text)
+  local onScreen,_x,_y=World3dToScreen2d(x,y,z)
+  local px,py,pz=table.unpack(GetGameplayCamCoords()) 
+  local scale = 0.45
+  if onScreen then
+    SetTextScale(scale, scale)
+    SetTextFont(4)
+    SetTextProportional(1)
+    SetTextColour(255, 255, 255, 215)
+    SetTextOutline()
+    SetTextEntry("STRING")
+    SetTextCentre(1)
+    AddTextComponentString(text)
     DrawText(_x,_y)
     local factor = (string.len(text)) / 370
     DrawRect(_x, _y + 0.0150, 0.030 + factor , 0.030, 66, 66, 66, 150)
-	end
+  end
 end
