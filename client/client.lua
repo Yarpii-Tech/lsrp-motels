@@ -37,7 +37,6 @@ Citizen.CreateThread(function()
   playerIdent = ESX.GetPlayerData().identifier
 end)
 
-
 AddEventHandler('playerSpawned', function()
   if FirstSpawn then
     Citizen.CreateThread(function()
@@ -73,7 +72,6 @@ AddEventHandler('playerSpawned', function()
   FirstSpawn = false 
   end
 end)
-
 
 function createBlips()
   for k,v in pairs(Config.Zones) do
@@ -316,7 +314,6 @@ AddEventHandler('lsrp-motels:roomOptions', function(room, motel)
     entry.close()
   end)
 end)
-
 
 RegisterNetEvent('lsrp-motels:roomMenu')
 AddEventHandler('lsrp-motels:roomMenu', function(room, motel)
